@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bluefish.Connections", "Bluefish.Connections\Bluefish.Connections.csproj", "{AB0A67DC-2151-4C4B-B255-9F05B4D9E444}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{628BAABD-4387-4E61-976F-07F8986129A1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+		publish.ps1 = publish.ps1
+		version.json = version.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB0A67DC-2151-4C4B-B255-9F05B4D9E444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB0A67DC-2151-4C4B-B255-9F05B4D9E444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB0A67DC-2151-4C4B-B255-9F05B4D9E444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB0A67DC-2151-4C4B-B255-9F05B4D9E444}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {986092DA-F548-4E21-A794-BA1B1B12AC0E}
+	EndGlobalSection
+EndGlobal
