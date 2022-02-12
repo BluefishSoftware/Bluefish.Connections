@@ -1,4 +1,4 @@
-﻿namespace DataFlow.Common.Connections;
+﻿namespace Bluefish.Connections.File;
 
 public class LocalFileSystemConnection : FileConnectionBase
 {
@@ -31,7 +31,7 @@ public class LocalFileSystemConnection : FileConnectionBase
     /// <returns>true if the delete was successful, other false.</returns>
     public override Task<bool> DeleteFileAsync(string path, CancellationToken cancellationToken = default)
     {
-        File.Delete(path);
+        System.IO.File.Delete(path);
         return Task.FromResult(true);
     }
 
@@ -51,7 +51,7 @@ public class LocalFileSystemConnection : FileConnectionBase
         var fullPath = $"{rootPath}{Path.DirectorySeparatorChar}{subPath}";
 
         // async read all bytes and return
-        return Task.FromResult((Stream)File.Open(fullPath, FileMode.Open, FileAccess.Read));
+        return Task.FromResult((Stream)System.IO.File.Open(fullPath, FileMode.Open, FileAccess.Read));
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public class LocalFileSystemConnection : FileConnectionBase
         }
 
         // async write all bytes and return path
-        using FileStream targetStream = File.Open(fullPath, FileMode.Create);
+        using FileStream targetStream = System.IO.File.Open(fullPath, FileMode.Create);
         await content.CopyToAsync(targetStream).ConfigureAwait(false);
         return true;
     }
