@@ -3,14 +3,14 @@
 namespace Bluefish.Connections.Sql;
 
 /// <summary>
-/// The SqlServer class represents a connection to a SQL Server.
+/// The SqlServerConnection class represents a connection to a SQL Server.
 /// </summary>
-public class SqlServer : SqlConnectionBase
+public class SqlServerConnection : SqlConnectionBase
 {
     /// <summary>
-    /// Initializes a new instance of the SqlServer class.
+    /// Initializes a new instance of the SqlServerConnection class.
     /// </summary>
-    public SqlServer()
+    public SqlServerConnection()
         : base("SQL Server", "System.Data.SqlClient")
     {
     }

@@ -3,14 +3,14 @@
 namespace Bluefish.Connections.Sql;
 
 /// <summary>
-/// The PostgreSql class represents a connection to a PostgreSql database.
+/// The PostgreSqlConnection class represents a connection to a PostgreSql database.
 /// </summary>
-public class PostgreSql : SqlConnectionBase
+public class PostgreSqlConnection : SqlConnectionBase
 {
     /// <summary>
-    /// Initializes a new instance of the PostgreSql class.
+    /// Initializes a new instance of the PostgreSqlConnection class.
     /// </summary>
-    public PostgreSql()
+    public PostgreSqlConnection()
         : base("PostgreSql", "Npgsql")
     {
     }

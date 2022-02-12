@@ -4,15 +4,15 @@ using Amazon.S3.Model;
 namespace Bluefish.Connections.File;
 
 /// <summary>
-/// The DigitalOceanSpaces class implements a connection that stores and retrieves files to
+/// The DigitalOceanSpacesConnection class implements a connection that stores and retrieves files to
 /// a DigitalOcean Spaces account.
 /// </summary>
-public class DigitalOceanSpaces : FileConnectionBase
+public class DigitalOceanSpacesConnection : FileConnectionBase
 {
     /// <summary>
-    /// Initializes a new instance of the DigitalOceanSpaces class.
+    /// Initializes a new instance of the DigitalOceanSpacesConnection class.
     /// </summary>
-    public DigitalOceanSpaces()
+    public DigitalOceanSpacesConnection()
         : base("DigitalOcean Spaces")
     {
     }
