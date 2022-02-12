@@ -1,9 +1,9 @@
 ﻿namespace Bluefish.Connections.Models;
 
 /// <summary>
-/// The NameValue class holds a simple named value.
+/// The Metadata class holds a simple named value.
 /// </summary>
-public class NameValue
+public class Metadata
 {
     /// <summary>
     /// Gets or sets the name of the value.

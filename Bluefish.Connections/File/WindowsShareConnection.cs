@@ -77,7 +77,7 @@ public class WindowsShareConnection : FileConnectionBase
     /// <param name="metadata">Optional metadata to store against the file.</param>
     /// <param name="cancellationToken">Token to allow cancellation of save.</param>
     /// <returns>true if the upload was successful, other false.</returns>
-    public override async Task<bool> PutFileAsync(string path, Stream content, IEnumerable<NameValue>? metadata = null, CancellationToken cancellationToken = default)
+    public override async Task<bool> PutFileAsync(string path, Stream content, IEnumerable<Metadata>? metadata = null, CancellationToken cancellationToken = default)
     {
         // calculate path
         var shareName = ShareName.Replace("/", "\\").TrimStart('\\').TrimEnd('\\');

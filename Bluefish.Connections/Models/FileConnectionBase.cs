@@ -35,5 +35,5 @@ public abstract class FileConnectionBase : IFileConnection
     /// <param name="content">Actual data top be saved.</param>
     /// <param name="metadata">Optional metadata to store against the file.</param>
     /// <param name="cancellationToken">Token to allow cancellation of save.</param>
-    public abstract Task<bool> PutFileAsync(string path, Stream content, IEnumerable<NameValue>? metadata = null, CancellationToken cancellationToken = default);
+    public abstract Task<bool> PutFileAsync(string path, Stream content, IEnumerable<Metadata>? metadata = null, CancellationToken cancellationToken = default);
 }
