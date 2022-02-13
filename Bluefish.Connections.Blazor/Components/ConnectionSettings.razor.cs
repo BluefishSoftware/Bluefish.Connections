@@ -20,4 +20,9 @@ public partial class ConnectionSettings
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
 
+    private async Task OnSettingsChanged(string settings)
+    {
+        Settings = settings;
+        await SettingsChanged.InvokeAsync(settings).ConfigureAwait(true);
+    }
 }

@@ -4,14 +4,16 @@
     case "Bluefish.Connections.Email.SendGridConnection, Bluefish.Connections":
         <SendGridSettings CanEdit="CanEdit"
                           CssClass="@CssClass"
-                          @bind-Settings="@Settings">
+                          Settings="@Settings"
+                          SettingsChanged="OnSettingsChanged">
         </SendGridSettings>
         break;
 
     case "Bluefish.Connections.Email.SmtpConnection, Bluefish.Connections":
         <SmtpSettings CanEdit="CanEdit"
                       CssClass="@CssClass"
-                      @bind-Settings="@Settings">
+                      Settings="@Settings"
+                      SettingsChanged="OnSettingsChanged">
         </SmtpSettings>
         break;
 
@@ -19,42 +21,48 @@
     case "Bluefish.Connections.File.DigitalOceanSpacesConnection, Bluefish.Connections":
         <DigitalOceanSpacesSettings CanEdit="CanEdit"
                                     CssClass="@CssClass"
-                                    @bind-Settings="@Settings">
+                                    Settings="@Settings"
+                                    SettingsChanged="OnSettingsChanged">
         </DigitalOceanSpacesSettings>
         break;
 
     case "Bluefish.Connections.File.DropboxConnection, Bluefish.Connections":
         <DropboxSettings CanEdit="CanEdit"
                          CssClass="@CssClass"
-                         @bind-Settings="@Settings">
+                         Settings="@Settings"
+                         SettingsChanged="OnSettingsChanged">
         </DropboxSettings>
         break;
 
     case "Bluefish.Connections.File.FtpConnection, Bluefish.Connections":
         <FtpSettings CanEdit="CanEdit"
                      CssClass="@CssClass"
-                     @bind-Settings="@Settings">
+                     Settings="@Settings"
+                     SettingsChanged="OnSettingsChanged">
         </FtpSettings>
         break;
 
     case "Bluefish.Connections.File.LocalFileSystemConnection, Bluefish.Connections":
         <LocalFileSystemSettings CanEdit="CanEdit"
                                  CssClass="@CssClass"
-                                 @bind-Settings="@Settings">
+                                 Settings="@Settings"
+                                 SettingsChanged="OnSettingsChanged">
         </LocalFileSystemSettings>
         break;
 
     case "Bluefish.Connections.File.OneDriveConnection, Bluefish.Connections":
         <OneDriveSettings CanEdit="CanEdit"
                           CssClass="@CssClass"
-                          @bind-Settings="@Settings">
+                          Settings="@Settings"
+                          SettingsChanged="OnSettingsChanged">
         </OneDriveSettings>
         break;
 
     case "Bluefish.Connections.File.WindowsShareConnection, Bluefish.Connections":
         <WindowsShareSettings CanEdit="CanEdit"
                               CssClass="@CssClass"
-                              @bind-Settings="@Settings">
+                              Settings="@Settings"
+                              SettingsChanged="OnSettingsChanged">
         </WindowsShareSettings>
         break;
 
@@ -62,14 +70,16 @@
     case "Bluefish.Connections.Sql.PostgreSqlConnection, Bluefish.Connections":
         <PostgreSqlSettings CanEdit="CanEdit"
                             CssClass="@CssClass"
-                            @bind-Settings="@Settings">
+                            Settings="@Settings"
+                            SettingsChanged="OnSettingsChanged">
         </PostgreSqlSettings>
         break;
 
     case "Bluefish.Connections.Sql.SqlServerConnection, Bluefish.Connections":
         <SqlServerSettings CanEdit="CanEdit"
                            CssClass="@CssClass"
-                           @bind-Settings="@Settings">
+                           Settings="@Settings"
+                           SettingsChanged="OnSettingsChanged">
         </SqlServerSettings>
         break;
 
