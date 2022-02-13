@@ -1,0 +1,148 @@
+﻿<div class="mb-2">
+    <label class="form-label">FTP Host</label>
+    <InputText ValueExpression="@(() => _connection.FtpHost)"
+               Value="@_connection.FtpHost"
+               ValueChanged="OnFtpHostChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Name or IP address of FTP Host.</div>
+    <ValidationMessage For="() => _connection.FtpHost" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">FTP Port</label>
+    <InputNumber TValue="int"
+                 ValueExpression="@(() => _connection.FtpPort)"
+                 Value="@_connection.FtpPort"
+                 ValueChanged="OnFtpPortChanged"
+                 class="form-control form-control-sm"
+                 min="0"
+                 max="65535" />
+    <div class="form-text">Port number to connect to on host.</div>
+    <ValidationMessage For="() => _connection.FtpPort" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">FTP Username</label>
+    <InputText ValueExpression="@(() => _connection.FtpUsername)"
+               Value="@_connection.FtpUsername"
+               ValueChanged="OnFtpUsernameChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Username of account to connect with.</div>
+    <ValidationMessage For="() => _connection.FtpUsername" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">FTP Password</label>
+    <InputText ValueExpression="@(() => _connection.FtpPassword)"
+               Value="@_connection.FtpPassword"
+               ValueChanged="OnFtpPasswordChanged"
+               class="form-control form-control-sm"
+               type="password" />
+    <div class="form-text">Password of account to connect with.</div>
+    <ValidationMessage For="() => _connection.FtpPassword" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">FTP Timeout</label>
+    <InputNumber TValue="int"
+                 ValueExpression="@(() => _connection.FtpTimeout)"
+                 Value="@_connection.FtpTimeout"
+                 ValueChanged="OnFtpTimeoutChanged"
+                 class="form-control form-control-sm"
+                 min="0" />
+    <div class="form-text">Timeout of connection attempt (in milliseconds).</div>
+    <ValidationMessage For="() => _connection.FtpTimeout" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">SSL Mode</label>
+    <InputSelect TValue="SslModes"
+                 ValueExpression="@(() => _connection.SslMode)"
+                 Value="@_connection.SslMode"
+                 ValueChanged="OnSslModeChanged"
+                 class="form-control form-control-sm">
+        <option value="@SslModes.None">None</option>
+        <option value="@SslModes.Implicit">Implicit</option>
+        <option value="@SslModes.Explicit">Explicit</option>
+    </InputSelect>
+    <div class="form-text">SSL mode to use on connections.</div>
+    <ValidationMessage For="() => _connection.SslMode" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Root Folder</label>
+    <InputText ValueExpression="@(() => _connection.RootFolder)"
+               Value="@_connection.RootFolder"
+               ValueChanged="OnRootFolderChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Root folder where files will be placed under. Leave blank for root folder. Use forward slashes to separate sub folders (e.g. /voicenet/recordings)</div>
+    <ValidationMessage For="() => _connection.RootFolder" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Proxy Type</label>
+    <InputSelect TValue="FtpProxyServerTypes"
+                 ValueExpression="@(() => _connection.ProxyType)"
+                 Value="@_connection.ProxyType"
+                 ValueChanged="OnProxyTypeChanged"
+                 class="form-control form-control-sm">
+        <option value="@FtpProxyServerTypes.None">None</option>
+        <option value="@FtpProxyServerTypes.Socks4">Socks4</option>
+        <option value="@FtpProxyServerTypes.Socks4a">Socks4a</option>
+        <option value="@FtpProxyServerTypes.Socks5">Socks5</option>
+        <option value="@FtpProxyServerTypes.HttpConnect">HttpConnect</option>
+        <option value="@FtpProxyServerTypes.FtpSite">FtpSite</option>
+        <option value="@FtpProxyServerTypes.FtpUser">FtpUser</option>
+        <option value="@FtpProxyServerTypes.FtpOpen">FtpOpen</option>
+        <option value="@FtpProxyServerTypes.FtpDoubleLogin">FtpDoubleLogin</option>
+    </InputSelect>
+    <div class="form-text">Proxy mode to use for connection.</div>
+    <ValidationMessage For="() => _connection.ProxyType" />
+</div>
+
+@if (_connection.ProxyType != FtpProxyServerTypes.None)
+{
+    <div class="mb-2">
+        <label class="form-label">Proxy Server</label>
+        <InputText ValueExpression="@(() => _connection.ProxyServer)"
+                   Value="@_connection.ProxyServer"
+                   ValueChanged="OnProxyServerChanged"
+                   class="form-control form-control-sm" />
+        <div class="form-text">Name or IP address of Proxy Server.</div>
+        <ValidationMessage For="() => _connection.ProxyServer" />
+    </div>
+
+    <div class="mb-2">
+        <label class="form-label">Proxy Port</label>
+        <InputNumber TValue="int"
+                     ValueExpression="@(() => _connection.ProxyPort)"
+                     Value="@_connection.ProxyPort"
+                     ValueChanged="OnProxyPortChanged"
+                     class="form-control form-control-sm"
+                     min="0"
+                     max="65535" />
+        <div class="form-text">Port number to connect to on server.</div>
+        <ValidationMessage For="() => _connection.ProxyPort" />
+    </div>
+
+    <div class="mb-2">
+        <label class="form-label">Proxy Username</label>
+        <InputText ValueExpression="@(() => _connection.FtpUsername)"
+                   Value="@_connection.ProxyUser"
+                   ValueChanged="OnProxyUserChanged"
+                   class="form-control form-control-sm" />
+        <div class="form-text">Username of account to connect to server with.</div>
+        <ValidationMessage For="() => _connection.ProxyUser" />
+    </div>
+
+    <div class="mb-2">
+        <label class="form-label">Proxy Password</label>
+        <InputText ValueExpression="@(() => _connection.ProxyPassword)"
+                   Value="@_connection.ProxyPassword"
+                   ValueChanged="OnProxyPasswordChanged"
+                   class="form-control form-control-sm"
+                   type="password" />
+        <div class="form-text">Password of account to connect to server with.</div>
+        <ValidationMessage For="() => _connection.ProxyPassword" />
+    </div>
+}

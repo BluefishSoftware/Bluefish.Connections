@@ -1,0 +1,9 @@
+﻿<div class="mb-2">
+    <label class="form-label">API Key</label>
+    <InputText ValueExpression="@(() => _connection.ApiKey)"
+               Value="@_connection.ApiKey"
+               ValueChanged="OnApiKeyChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">API Key to access the SendGrid API.</div>
+    <ValidationMessage For="() => _connection.ApiKey" />
+</div>

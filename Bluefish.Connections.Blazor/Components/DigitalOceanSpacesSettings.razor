@@ -1,0 +1,40 @@
+﻿<div class="mb-2">
+    <label class="form-label">Service Url</label>
+    <InputText autocomplete="off"
+               disabled="@(!CanEdit)"
+               ValueExpression="@(() => _connection.ServiceUrl)"
+               Value="@_connection.ServiceUrl"
+               ValueChanged="OnServiceUrlChanged"
+               class="form-control form-control-sm" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Space Name</label>
+    <InputText autocomplete="off"
+               disabled="@(!CanEdit)"
+               ValueExpression="@(() => _connection.SpaceName)"
+               Value="@_connection.SpaceName"
+               ValueChanged="OnSpaceNameChanged"
+               class="form-control form-control-sm" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Access Key</label>
+    <InputText autocomplete="off"
+               disabled="@(!CanEdit)"
+               ValueExpression="@(() => _connection.AccessKey)"
+               Value="@_connection.AccessKey"
+               ValueChanged="OnAccessKeyChanged"
+               class="form-control form-control-sm" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Secret</label>
+    <InputText autocomplete="off"
+               disabled="@(!CanEdit)"
+               type="password"
+               ValueExpression="@(() => _connection.Secret)"
+               Value="@_connection.Secret"
+               ValueChanged="OnSecretChanged"
+               class="form-control form-control-sm" />
+</div>

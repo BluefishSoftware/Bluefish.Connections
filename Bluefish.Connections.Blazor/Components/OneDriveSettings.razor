@@ -1,0 +1,60 @@
+﻿<div class="mb-2">
+    <label class="form-label">Tenant Id</label>
+    <InputText ValueExpression="@(() => _connection.TenantId)"
+               Value="@_connection.TenantId"
+               ValueChanged="OnTenantIdChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Key that identifies the Microsoft OneDrive Tenant.</div>
+    <ValidationMessage For="() => _connection.TenantId" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Client Id</label>
+    <InputText ValueExpression="@(() => _connection.ClientId)"
+               Value="@_connection.ClientId"
+               ValueChanged="OnClientIdChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Key that identifies the OneDrive application.</div>
+    <ValidationMessage For="() => _connection.ClientId" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Client Secret</label>
+    <InputText ValueExpression="@(() => _connection.ClientSecret)"
+               Value="@_connection.ClientSecret"
+               ValueChanged="OnClientSecretChanged"
+               class="form-control form-control-sm"
+               type="password" />
+    <div class="form-text">Secret for the identified OneDrive application.</div>
+    <ValidationMessage For="() => _connection.ClientSecret" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Access Token</label>
+    <InputText ValueExpression="@(() => _connection.AccessToken)"
+               Value="@_connection.AccessToken"
+               ValueChanged="OnAccessTokenChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Access token generated for user access to OneDrive application.</div>
+    <ValidationMessage For="() => _connection.AccessToken" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Drive</label>
+    <InputText ValueExpression="@(() => _connection.Drive)"
+               Value="@_connection.Drive"
+               ValueChanged="OnDriveChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">OneDrive top level drive to store files.</div>
+    <ValidationMessage For="() => _connection.Drive" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Root Folder</label>
+    <InputText ValueExpression="@(() => _connection.Folder)"
+               Value="@_connection.Folder"
+               ValueChanged="OnFolderChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Root folder where files will be placed under. Leave blank for root folder. Use forward slashes to separate sub folders (e.g. /voicenet/recordings)</div>
+    <ValidationMessage For="() => _connection.Folder" />
+</div>

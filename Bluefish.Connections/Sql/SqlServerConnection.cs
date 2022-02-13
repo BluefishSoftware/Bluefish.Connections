@@ -33,7 +33,12 @@ public class SqlServerConnection : SqlConnectionBase
     public string Database { get; set; } = String.Empty;
 
     /// <summary>
-    /// Gets or sets the User Id of account to connect as, leave blank to use integrated security.
+    /// Gets or sets whether Windows Authentication is to be used.
+    /// </summary>
+    public bool UseWindowsAuthentication { get; set; } = true;
+
+    /// <summary>
+    /// Gets or sets the User Id of account to connect as.
     /// </summary>
     public string UserId { get; set; } = String.Empty;
 

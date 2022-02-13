@@ -1,0 +1,43 @@
+﻿<div class="mb-2">
+    <label class="form-label">Server</label>
+    <InputText ValueExpression="@(() => _connection.Server)"
+               Value="@_connection.Server"
+               ValueChanged="OnServerChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Name or IP address of SMTP Server.</div>
+    <ValidationMessage For="() => _connection.Server" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Port</label>
+    <InputNumber TValue="int"
+                 ValueExpression="@(() => _connection.Port)"
+                 Value="@_connection.Port"
+                 ValueChanged="OnPortChanged"
+                 class="form-control form-control-sm"
+                 min="0"
+                 max="65535" />
+    <div class="form-text">Port number to connect to on server.</div>
+    <ValidationMessage For="() => _connection.Port" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Username</label>
+    <InputText ValueExpression="@(() => _connection.Username)"
+               Value="@_connection.Username"
+               ValueChanged="OnUsernameChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Username of account to connect with.</div>
+    <ValidationMessage For="() => _connection.Username" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Password</label>
+    <InputText ValueExpression="@(() => _connection.Password)"
+               Value="@_connection.Password"
+               ValueChanged="OnPasswordChanged"
+               class="form-control form-control-sm"
+               type="password" />
+    <div class="form-text">Password of account to connect with.</div>
+    <ValidationMessage For="() => _connection.Password" />
+</div>

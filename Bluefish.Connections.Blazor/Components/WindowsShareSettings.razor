@@ -1,0 +1,29 @@
+﻿<div class="mb-2">
+    <label class="form-label">Server Name</label>
+    <InputText ValueExpression="@(() => _connection.ServerName)"
+               Value="@_connection.ServerName"
+               ValueChanged="OnServerNameChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Name of the server.</div>
+    <ValidationMessage For="() => _connection.ServerName" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Share Name</label>
+    <InputText ValueExpression="@(() => _connection.ShareName)"
+               Value="@_connection.ShareName"
+               ValueChanged="OnShareNameChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Name of the share.</div>
+    <ValidationMessage For="() => _connection.ShareName" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Root Folder</label>
+    <InputText ValueExpression="@(() => _connection.RootPath)"
+               Value="@_connection.RootPath"
+               ValueChanged="OnRootPathChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Relative path to root folder.</div>
+    <ValidationMessage For="() => _connection.RootPath" />
+</div>

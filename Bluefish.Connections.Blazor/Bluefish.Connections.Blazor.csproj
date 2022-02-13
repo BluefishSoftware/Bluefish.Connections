@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Authors>Mark Goldring</Authors>
+		<Company>Bluefish Software Ltd</Company>
+		<Description>A library that provides Blazor components for the Bluefish.Connections library.</Description>
+		<PackageIcon>BluefishIcon.png</PackageIcon>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<Copyright>2022 Bluefish Software Ltd</Copyright>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\BluefishIcon.png" Link="BluefishIcon.png">
+	    <PackagePath></PackagePath>
+	    <Pack>true</Pack>
+	  </None>
+	  <None Include="..\LICENSE.txt" Link="LICENSE.txt">
+	    <PackagePath></PackagePath>
+	    <Pack>true</Pack>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Bluefish.Blazor" Version="2.0.13" />
+		<PackageReference Include="Bluefish.Connections" Version="1.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+</Project>

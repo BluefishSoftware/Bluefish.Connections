@@ -41,7 +41,7 @@ public class FtpConnection : FileConnectionBase, IInitializableConnection
     /// </summary>
     public string RootFolder { get; set; } = String.Empty;
 
-    public SslModes SslMode { get; set; }
+    public FtpSslModes SslMode { get; set; }
 
     /// <summary>
     /// Gets or sets the timeout of commands, in milliseconds.
@@ -286,7 +286,7 @@ public enum FtpProxyServerTypes
     FtpDoubleLogin = 8
 }
 
-public enum SslModes
+public enum FtpSslModes
 {
     //
     // Summary:

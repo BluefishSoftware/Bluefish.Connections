@@ -1,0 +1,9 @@
+﻿<div class="mb-2">
+    <label class="form-label">Root Folder</label>
+    <InputText ValueExpression="@(() => _connection.RootPath)"
+               Value="@_connection.RootPath"
+               ValueChanged="OnRootPathChanged"
+               class="form-control form-control-sm" />
+    <div class="form-text">Root path on the Share.</div>
+    <ValidationMessage For="() => _connection.RootPath" />
+</div>

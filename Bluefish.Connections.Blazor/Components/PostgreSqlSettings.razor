@@ -1,0 +1,73 @@
+﻿<div class="mb-2">
+    <label class="form-label">Host</label>
+    <InputText ValueExpression="@(() => _connection.Host)"
+               Value="@_connection.Host"
+               ValueChanged="OnHostChanged"
+               class="form-control form-control-sm" />
+    <ValidationMessage For="() => _connection.Host" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Port</label>
+    <InputNumber TValue="int"
+               ValueExpression="@(() => _connection.Port)"
+               Value="@_connection.Port"
+               ValueChanged="OnPortChanged"
+               class="form-control form-control-sm" />
+    <ValidationMessage For="() => _connection.Port" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Database</label>
+    <InputText ValueExpression="@(() => _connection.Database)"
+               Value="@_connection.Database"
+               ValueChanged="OnDatabaseChanged"
+               class="form-control form-control-sm" />
+    <ValidationMessage For="() => _connection.Database" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">User Id</label>
+    <InputText ValueExpression="@(() => _connection.UserId)"
+                Value="@_connection.UserId"
+                ValueChanged="OnUserIdChanged"
+                class="form-control form-control-sm" />
+    <ValidationMessage For="() => _connection.UserId" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Password</label>
+    <InputText ValueExpression="@(() => _connection.Password)"
+                Value="@_connection.Password"
+                ValueChanged="OnPasswordChanged"
+                class="form-control form-control-sm"
+                type="password" />
+    <ValidationMessage For="() => _connection.Password" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">Connection Timeout</label>
+    <InputNumber TValue="int"
+               ValueExpression="@(() => _connection.ConnectionTimeout)"
+               Value="@_connection.ConnectionTimeout"
+               ValueChanged="OnConnectionTimeoutChanged"
+               class="form-control form-control-sm" />
+    <ValidationMessage For="() => _connection.ConnectionTimeout" />
+</div>
+
+<div class="mb-2">
+    <label class="form-label">SSL Mode</label>
+    <InputSelect TValue="string"
+                 ValueExpression="@(() => _connection.SslMode)"
+                 Value="@_connection.SslMode"
+                 ValueChanged="OnSslModeChanged"
+                 class="form-control form-control-sm">
+        <option value="disable">Disable</option>
+        <option value="allow">Allow</option>
+        <option value="prefer">Prefer</option>
+        <option value="require">Require</option>
+        <option value="verify-ca">Verify-CA</option>
+        <option value="verify-full">Verify-Full</option>
+    </InputSelect>
+    <ValidationMessage For="() => _connection.SslMode" />
+</div>
