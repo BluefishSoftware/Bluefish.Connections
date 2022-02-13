@@ -1,6 +1,6 @@
 ﻿namespace Bluefish.Connections.Blazor.Components;
 
-public partial class SettingsSwitcher
+public partial class ConnectionSettings
 {
     [Parameter]
     public bool CanEdit { get; set; } = true;
@@ -13,6 +13,9 @@ public partial class SettingsSwitcher
 
     [Parameter]
     public string Settings { get; set; } = String.Empty;
+
+    [Parameter]
+    public EventCallback<string> SettingsChanged { get; set; }
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
