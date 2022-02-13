@@ -1,0 +1,79 @@
+﻿@switch (ConnectionType)
+{
+    @* Email Connections *@
+    case "Bluefish.Connections.Email.SendGridConnection, Bluefish.Connections":
+        <SendGridSettings CanEdit="CanEdit"
+                          CssClass="@CssClass"
+                          @bind-Settings="@Settings">
+        </SendGridSettings>
+        break;
+
+    case "Bluefish.Connections.Email.SmtpConnection, Bluefish.Connections":
+        <SmtpSettings CanEdit="CanEdit"
+                      CssClass="@CssClass"
+                      @bind-Settings="@Settings">
+        </SmtpSettings>
+        break;
+
+    @* File Connections *@
+    case "Bluefish.Connections.File.DigitalOceanSpacesConnection, Bluefish.Connections":
+        <DigitalOceanSpacesSettings CanEdit="CanEdit"
+                                    CssClass="@CssClass"
+                                    @bind-Settings="@Settings">
+        </DigitalOceanSpacesSettings>
+        break;
+
+    case "Bluefish.Connections.File.DropboxConnection, Bluefish.Connections":
+        <DropboxSettings CanEdit="CanEdit"
+                         CssClass="@CssClass"
+                         @bind-Settings="@Settings">
+        </DropboxSettings>
+        break;
+
+    case "Bluefish.Connections.File.FtpConnection, Bluefish.Connections":
+        <FtpSettings CanEdit="CanEdit"
+                     CssClass="@CssClass"
+                     @bind-Settings="@Settings">
+        </FtpSettings>
+        break;
+
+    case "Bluefish.Connections.File.LocalFileSystemConnection, Bluefish.Connections":
+        <LocalFileSystemSettings CanEdit="CanEdit"
+                                 CssClass="@CssClass"
+                                 @bind-Settings="@Settings">
+        </LocalFileSystemSettings>
+        break;
+
+    case "Bluefish.Connections.File.OneDriveConnection, Bluefish.Connections":
+        <OneDriveSettings CanEdit="CanEdit"
+                          CssClass="@CssClass"
+                          @bind-Settings="@Settings">
+        </OneDriveSettings>
+        break;
+
+    case "Bluefish.Connections.File.WindowsShareConnection, Bluefish.Connections":
+        <WindowsShareSettings CanEdit="CanEdit"
+                              CssClass="@CssClass"
+                              @bind-Settings="@Settings">
+        </WindowsShareSettings>
+        break;
+
+    @* SQL Connections *@
+    case "Bluefish.Connections.Sql.PostgreSqlConnection, Bluefish.Connections":
+        <PostgreSqlSettings CanEdit="CanEdit"
+                            CssClass="@CssClass"
+                            @bind-Settings="@Settings">
+        </PostgreSqlSettings>
+        break;
+
+    case "Bluefish.Connections.Sql.SqlServerConnection, Bluefish.Connections":
+        <SqlServerSettings CanEdit="CanEdit"
+                           CssClass="@CssClass"
+                           @bind-Settings="@Settings">
+        </SqlServerSettings>
+        break;
+
+    default:
+        @ChildContent
+        break;
+}
