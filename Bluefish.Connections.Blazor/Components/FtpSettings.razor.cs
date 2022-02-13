@@ -2,22 +2,6 @@
 
 public partial class FtpSettings
 {
-    private FtpConnection _connection = new();
-
-    [Parameter]
-    public string Settings { get; set; } = String.Empty;
-
-    [Parameter]
-    public EventCallback<string> SettingsChanged { get; set; }
-
-    protected override void OnParametersSet()
-    {
-        if (!string.IsNullOrWhiteSpace(Settings))
-        {
-            _connection = JsonSerializer.Deserialize<FtpConnection>(Settings) ?? new();
-        }
-    }
-
     private async Task OnFtpHostChanged(string value)
     {
         _connection.FtpHost = value;
@@ -84,15 +68,9 @@ public partial class FtpSettings
         await UpdateSettings().ConfigureAwait(true);
     }
 
-    private async Task OnSslModeChanged(SslModes value)
+    private async Task OnSslModeChanged(FtpSslModes value)
     {
         _connection.SslMode = value;
         await UpdateSettings().ConfigureAwait(true);
-    }
-
-    private async Task UpdateSettings()
-    {
-        var settings = JsonSerializer.Serialize(_connection);
-        await SettingsChanged.InvokeAsync(settings).ConfigureAwait(true);
     }
 }

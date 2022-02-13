@@ -1,66 +1,74 @@
-﻿<div class="mb-2">
+﻿@inherits SettingsBase<SqlServerConnection>
+
+<div class="@CssClass">
     <label class="form-label">Server</label>
     <InputText ValueExpression="@(() => _connection.Server)"
                Value="@_connection.Server"
                ValueChanged="OnServerChanged"
-               class="form-control form-control-sm" />
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.Server" />
 </div>
 
-<div class="mb-2">
+<div class="@CssClass">
     <label class="form-label">Port</label>
     <InputNumber TValue="int"
                ValueExpression="@(() => _connection.Port)"
                Value="@_connection.Port"
                ValueChanged="OnPortChanged"
-               class="form-control form-control-sm" />
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.Port" />
 </div>
 
-<div class="mb-2">
+<div class="@CssClass">
     <label class="form-label">Database</label>
     <InputText ValueExpression="@(() => _connection.Database)"
                Value="@_connection.Database"
                ValueChanged="OnDatabaseChanged"
-               class="form-control form-control-sm" />
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.Database" />
 </div>
 
-@*<div class="mb-2">
+<div class="@CssClass">
     <BfSwitch Text="Windows Authentication"
               Value="_connection.UseWindowsAuthentication"
               ValueChanged="OnUseWindowsAuthenticationChanged" />
     <ValidationMessage For="() => _connection.UseWindowsAuthentication" />
-</div>*@
+</div>
 
-@*@if(!_connection.UseWindowsAuthentication)
-{*@
-    <div class="mb-2">
+@if(!_connection.UseWindowsAuthentication)
+{
+    <div class="@CssClass">
         <label class="form-label">User Id</label>
         <InputText ValueExpression="@(() => _connection.UserId)"
                    Value="@_connection.UserId"
                    ValueChanged="OnUserIdChanged"
-                   class="form-control form-control-sm" />
+                   class="form-control form-control-sm"
+                   disabled="@(!CanEdit)" />
         <ValidationMessage For="() => _connection.UserId" />
     </div>
 
-    <div class="mb-2">
+    <div class="@CssClass">
         <label class="form-label">Password</label>
         <InputText ValueExpression="@(() => _connection.Password)"
                    Value="@_connection.Password"
                    ValueChanged="OnPasswordChanged"
                    class="form-control form-control-sm"
-                   type="password" />
+                   type="password"
+                   disabled="@(!CanEdit)" />
         <ValidationMessage For="() => _connection.Password" />
     </div>
-@*}
-*@
-<div class="mb-2">
+}
+
+<div class="@CssClass">
     <label class="form-label">Connection Timeout</label>
     <InputNumber TValue="int"
                ValueExpression="@(() => _connection.ConnectionTimeout)"
                Value="@_connection.ConnectionTimeout"
                ValueChanged="OnConnectionTimeoutChanged"
-               class="form-control form-control-sm" />
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.ConnectionTimeout" />
 </div>

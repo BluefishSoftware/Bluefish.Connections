@@ -1,9 +1,11 @@
-﻿<div class="mb-2">
+﻿@inherits SettingsBase<LocalFileSystemConnection>
+
+<div class="@CssClass">
     <label class="form-label">Root Folder</label>
     <InputText ValueExpression="@(() => _connection.RootPath)"
                Value="@_connection.RootPath"
                ValueChanged="OnRootPathChanged"
-               class="form-control form-control-sm" />
-    <div class="form-text">Root path on the Share.</div>
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.RootPath" />
 </div>

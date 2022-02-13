@@ -1,4 +1,6 @@
-﻿<div class="mb-2">
+﻿@inherits SettingsBase<DigitalOceanSpacesConnection>
+
+<div class="@CssClass">
     <label class="form-label">Service Url</label>
     <InputText autocomplete="off"
                disabled="@(!CanEdit)"
@@ -8,7 +10,7 @@
                class="form-control form-control-sm" />
 </div>
 
-<div class="mb-2">
+<div class="@CssClass">
     <label class="form-label">Space Name</label>
     <InputText autocomplete="off"
                disabled="@(!CanEdit)"
@@ -18,7 +20,7 @@
                class="form-control form-control-sm" />
 </div>
 
-<div class="mb-2">
+<div class="@CssClass">
     <label class="form-label">Access Key</label>
     <InputText autocomplete="off"
                disabled="@(!CanEdit)"
@@ -28,7 +30,7 @@
                class="form-control form-control-sm" />
 </div>
 
-<div class="mb-2">
+<div class="@CssClass">
     <label class="form-label">Secret</label>
     <InputText autocomplete="off"
                disabled="@(!CanEdit)"

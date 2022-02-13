@@ -1,9 +1,12 @@
-﻿<div class="mb-2">
+﻿@inherits SettingsBase<SendGridConnection>
+
+<div class="@CssClass">
     <label class="form-label">API Key</label>
     <InputText ValueExpression="@(() => _connection.ApiKey)"
                Value="@_connection.ApiKey"
                ValueChanged="OnApiKeyChanged"
-               class="form-control form-control-sm" />
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
     <div class="form-text">API Key to access the SendGrid API.</div>
     <ValidationMessage For="() => _connection.ApiKey" />
 </div>

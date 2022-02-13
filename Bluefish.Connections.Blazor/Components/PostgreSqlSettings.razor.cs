@@ -2,22 +2,6 @@
 
 public partial class PostgreSqlSettings
 {
-    private PostgreSqlConnection _connection = new();
-
-    [Parameter]
-    public string Settings { get; set; } = string.Empty;
-
-    [Parameter]
-    public EventCallback<string> SettingsChanged { get; set; }
-
-    protected override void OnParametersSet()
-    {
-        if (!string.IsNullOrWhiteSpace(Settings))
-        {
-            _connection = JsonSerializer.Deserialize<PostgreSqlConnection>(Settings) ?? new();
-        }
-    }
-
     private async Task OnHostChanged(string value)
     {
         _connection.Host = value;
@@ -58,11 +42,5 @@ public partial class PostgreSqlSettings
     {
         _connection.SslMode = value;
         await UpdateSettings().ConfigureAwait(true);
-    }
-
-    private async Task UpdateSettings()
-    {
-        var settings = JsonSerializer.Serialize(_connection);
-        await SettingsChanged.InvokeAsync(settings).ConfigureAwait(true);
     }
 }
