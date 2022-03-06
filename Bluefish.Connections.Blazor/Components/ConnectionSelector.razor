@@ -1,0 +1,20 @@
+﻿<div class="@CssClass">
+    <label class="form-label">Type</label>
+    <InputSelect
+        autocomplete="off"
+        class="form-control form-control-sm"
+        disabled="@(!CanEdit)"
+        TValue="string"
+        ValueExpression="@(() => Type)"
+        Value="@Type"
+        ValueChanged="OnTypeChanged">
+        @if (ShowNone)
+        {
+            <option value="@TOKEN_NONE">(none)</option>
+        }
+        @foreach (var key in _dataTypes.Keys.OrderBy(x => _dataTypes[x]))
+        {
+            <option value="@key">@_dataTypes[key]</option>
+        }
+    </InputSelect>
+</div>

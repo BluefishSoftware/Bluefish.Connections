@@ -84,6 +84,13 @@
         break;
 
     default:
-        @ChildContent
+        @if (ChildContent is null)
+        {
+            <div></div>
+        }
+        else
+        {
+            @ChildContent
+        }
         break;
 }

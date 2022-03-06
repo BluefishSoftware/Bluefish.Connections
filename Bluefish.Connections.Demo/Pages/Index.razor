@@ -1,0 +1,27 @@
+﻿@page "/"
+@using Bluefish.Connections.Interfaces
+
+<PageTitle>Index</PageTitle>
+
+
+<EditForm Model="_model">
+
+    <ConnectionSelector @bind-Type="_dataType" />
+
+    <hr/>
+
+    <ConnectionSettings CanEdit="true"
+                        ConnectionType="@_dataType"
+                        @bind-Settings="_settings" />
+
+</EditForm>
+
+<hr/>
+
+<textarea style="width: 100%; height: 400px;">@_settings</textarea>
+
+@code {
+    private string _dataType = ConnectionSelector.TOKEN_NONE;
+    private object _model = new();
+    private string _settings = "{}";
+}

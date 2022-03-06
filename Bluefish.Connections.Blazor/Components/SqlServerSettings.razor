@@ -33,6 +33,7 @@
 
 <div class="@CssClass">
     <BfSwitch Text="Windows Authentication"
+              TValue="bool"
               Value="_connection.UseWindowsAuthentication"
               ValueChanged="OnUseWindowsAuthenticationChanged" />
     <ValidationMessage For="() => _connection.UseWindowsAuthentication" />
