@@ -45,7 +45,7 @@ public partial class ConnectionSelector
                 }
             }
         }
-        if(!ShowNone && _dataTypes.Count > 0)
+        if(!ShowNone && !_dataTypes.ContainsKey(Type) && _dataTypes.Count > 0)
         {
             await OnTypeChanged(_dataTypes.Keys.First());
         }
