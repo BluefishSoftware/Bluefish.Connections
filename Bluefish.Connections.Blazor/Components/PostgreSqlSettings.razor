@@ -71,12 +71,12 @@
                  ValueChanged="OnSslModeChanged"
                  class="form-control form-control-sm"
                  disabled="@(!CanEdit)">
-        <option value="disable">Disable</option>
-        <option value="allow">Allow</option>
-        <option value="prefer">Prefer</option>
-        <option value="require">Require</option>
-        <option value="verify-ca">Verify-CA</option>
-        <option value="verify-full">Verify-Full</option>
+        <option value="Disable">Disable</option>
+        <option value="Allow">Allow</option>
+        <option value="Prefer">Prefer</option>
+        <option value="Require">Require</option>
+        <option value="VerifyCA">Verify-CA</option>
+        <option value="VerifyFull">Verify-Full</option>
     </InputSelect>
     <ValidationMessage For="() => _connection.SslMode" />
 </div>

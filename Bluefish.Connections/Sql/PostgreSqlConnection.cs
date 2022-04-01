@@ -82,5 +82,45 @@ public class PostgreSqlConnection : SqlConnectionBase
         return NpgsqlFactory.Instance;
     }
 
+    public override string GetIdentitySpecifier()
+    {
+        return "GENERATED ALWAYS AS IDENTITY";
+    }
+
+    public override string GetQuotePrefix()
+    {
+        return "\"";
+    }
+
+    public override string GetQuoteSuffix()
+    {
+        return "\"";
+    }
+
+    public override string GetDataType(Type type, int? maxSize = null, int? precision = 18, int? scale = 2)
+    {
+        if (type.Equals(typeof(string)))
+        {
+            return maxSize.HasValue ? $"VARCHAR({maxSize})" : "TEXT";
+        }
+        if (type.Equals(typeof(Guid)))
+        {
+            return "UUID";
+        }
+        if (type.Equals(typeof(DateTime)))
+        {
+            return $"TIMESTAMP";
+        }
+        if (type.Equals(typeof(DateTimeOffset)))
+        {
+            return $"TIMESTAMPTZ";
+        }
+        if (type.Equals(typeof(bool)))
+        {
+            return "BOOLEAN";
+        }
+        return base.GetDataType(type, maxSize, precision, scale);
+    }
+
     #endregion
 }
