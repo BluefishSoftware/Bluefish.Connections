@@ -79,7 +79,7 @@ public abstract class SqlConnectionBase : ISqlConnection
         {
             sb.AppendLine();
         }
-        if (skip > 0)
+        if (skip > 0 || take > 0)
         {
             if(multiline)
             {
@@ -90,9 +90,6 @@ public abstract class SqlConnectionBase : ISqlConnection
                 sb.Append(' ');
             }
             sb.Append($"OFFSET {skip} ROWS");
-        }
-        if (take > 0)
-        {
             if (multiline)
             {
                 sb.AppendLine();
