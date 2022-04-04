@@ -14,4 +14,5 @@ public interface ISqlConnection : IConnection
     string GetQuotedValue(string value);
     string GetQuotePrefix();
     string GetQuoteSuffix();
+    string GetPagedQuery(string query, int take, int skip = 0);
 }

@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using System.Text;
 
 namespace Bluefish.Connections.Sql;
 
@@ -77,26 +78,6 @@ public class PostgreSqlConnection : SqlConnectionBase
         return builder.ToString();
     }
 
-    public override DbProviderFactory GetFactory()
-    {
-        return NpgsqlFactory.Instance;
-    }
-
-    public override string GetIdentitySpecifier()
-    {
-        return "GENERATED ALWAYS AS IDENTITY";
-    }
-
-    public override string GetQuotePrefix()
-    {
-        return "\"";
-    }
-
-    public override string GetQuoteSuffix()
-    {
-        return "\"";
-    }
-
     public override string GetDataType(Type type, int? maxSize = null, int? precision = 18, int? scale = 2)
     {
         if (type.Equals(typeof(string)))
@@ -120,6 +101,68 @@ public class PostgreSqlConnection : SqlConnectionBase
             return "BOOLEAN";
         }
         return base.GetDataType(type, maxSize, precision, scale);
+    }
+
+    public override DbProviderFactory GetFactory()
+    {
+        return NpgsqlFactory.Instance;
+    }
+
+    public override string GetIdentitySpecifier()
+    {
+        return "GENERATED ALWAYS AS IDENTITY";
+    }
+
+    public override string GetPagedQuery(string query, int take = 0, int skip = 0)
+    {
+        query = query.Trim();
+        var terminated = query.EndsWith(';');
+        var multiline = query.Contains('\n');
+        var sb = new StringBuilder(query.TrimEnd(';'));
+        if (multiline)
+        {
+            sb.AppendLine();
+        }
+        if (take > 0)
+        {
+            if (multiline)
+            {
+                sb.AppendLine();
+            }
+            else
+            {
+                sb.Append(' ');
+            }
+            sb.Append($"LIMIT {take}");
+        }
+        if (skip > 0)
+        {
+            if (multiline)
+            {
+                sb.AppendLine();
+            }
+            else
+            {
+                sb.Append(' ');
+            }
+            sb.Append($"OFFSET {skip}");
+        }
+        if(terminated)
+        {
+            sb.Append(';');
+        }
+        return sb.ToString();
+    }
+
+
+    public override string GetQuotePrefix()
+    {
+        return "\"";
+    }
+
+    public override string GetQuoteSuffix()
+    {
+        return "\"";
     }
 
     #endregion

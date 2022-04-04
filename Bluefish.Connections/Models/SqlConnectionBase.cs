@@ -1,4 +1,6 @@
-﻿namespace Bluefish.Connections.Models;
+﻿using System.Text;
+
+namespace Bluefish.Connections.Models;
 
 public abstract class SqlConnectionBase : ISqlConnection
 {
@@ -18,33 +20,6 @@ public abstract class SqlConnectionBase : ISqlConnection
     public ConnectionTypes Type => ConnectionTypes.SQL;
 
     public abstract string GetConnectionString();
-
-    public abstract DbProviderFactory GetFactory();
-
-    public virtual string GetParameterPlaceholder(string name)
-    {
-        return $"@{name}";
-    }
-
-    public virtual string GetIdentitySpecifier()
-    {
-        return "IDENTITY";
-    }
-
-    public virtual string GetQuotedValue(string value)
-    {
-        return $"{GetQuotePrefix()}{value}{GetQuoteSuffix()}";
-    }
-
-    public virtual string GetQuotePrefix()
-    {
-        return "[";
-    }
-
-    public virtual string GetQuoteSuffix()
-    {
-        return "]";
-    }
 
     public virtual string GetDataType(Type type, int? maxSize = null, int? precision = 18, int? scale = 2)
     {
@@ -85,5 +60,73 @@ public abstract class SqlConnectionBase : ISqlConnection
             return "SMALLINT";
         }
         return String.Empty;
+    }
+
+    public abstract DbProviderFactory GetFactory();
+
+    public virtual string GetIdentitySpecifier()
+    {
+        return "IDENTITY";
+    }
+
+    public virtual string GetPagedQuery(string query, int take = 0, int skip = 0)
+    {
+        query = query.Trim();
+        var terminated = query.EndsWith(';');
+        var multiline = query.Contains('\n');
+        var sb = new StringBuilder(query.TrimEnd(';'));
+        if (multiline)
+        {
+            sb.AppendLine();
+        }
+        if (skip > 0)
+        {
+            if(multiline)
+            {
+                sb.AppendLine();
+            }
+            else
+            {
+                sb.Append(' ');
+            }
+            sb.Append($"OFFSET {skip} ROWS");
+        }
+        if (take > 0)
+        {
+            if (multiline)
+            {
+                sb.AppendLine();
+            }
+            else
+            {
+                sb.Append(' ');
+            }
+            sb.Append($"FETCH NEXT {take} ROWS ONLY");
+        }
+        if (terminated)
+        {
+            sb.Append(';');
+        }
+        return sb.ToString();
+    }
+
+    public virtual string GetParameterPlaceholder(string name)
+    {
+        return $"@{name}";
+    }
+
+    public virtual string GetQuotedValue(string value)
+    {
+        return $"{GetQuotePrefix()}{value}{GetQuoteSuffix()}";
+    }
+
+    public virtual string GetQuotePrefix()
+    {
+        return "[";
+    }
+
+    public virtual string GetQuoteSuffix()
+    {
+        return "]";
     }
 }
