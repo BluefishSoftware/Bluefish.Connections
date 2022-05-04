@@ -1,0 +1,55 @@
+﻿@page "/SqlTest"
+@using Bluefish.Connections.Interfaces
+
+<div>SQL TEST</div>
+
+<hr/>
+
+<!-- connection -->
+<EditForm Model="_model">
+
+    <ConnectionSelector @bind-Type="_model.ConnectionType"
+                        FilterType="Models.ConnectionTypes.SQL" />
+    <hr/>
+
+    <ConnectionSettings CanEdit="true"
+                        ConnectionType="@_model.ConnectionType"
+                        @bind-Settings="_model.ConnectionSettings" />
+
+    <hr/>
+
+    <div>
+         <div class="mb-3">
+            <label for="path" class="form-label">Query</label>
+            <InputTextArea @bind-Value="_model.Query"
+                           class="form-control"
+                           id="path"
+                           rows="4" />
+            <div class="form-text">Query to perform.</div>
+          </div>
+    </div>
+
+    <div>
+        <button @onclick="OnRunQueryAsync">Run Query</button>
+    </div>
+
+</EditForm>
+
+<hr/>
+
+@if(_model.HasError)
+{
+    <div class="text-danger">
+        @_model.ErrorMessage
+    </div>
+}
+else
+{
+    <div>
+        <div class="query-rows">Rows returned: @_model.Rows</div>
+        <textarea class="query-output"
+                  readonly="@true"
+                  rows="20">@_model.Output</textarea>
+    </div>
+}
+

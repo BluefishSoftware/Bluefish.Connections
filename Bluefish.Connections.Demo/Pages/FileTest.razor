@@ -1,0 +1,51 @@
+﻿@page "/FileTest"
+@using Bluefish.Connections.Interfaces
+
+<div>File TEST</div>
+
+<hr/>
+
+<!-- connection -->
+<EditForm Model="_model">
+
+    <ConnectionSelector @bind-Type="_model.ConnectionType"
+                        FilterType="Models.ConnectionTypes.File" />
+    <hr/>
+
+    <ConnectionSettings CanEdit="true"
+                        ConnectionType="@_model.ConnectionType"
+                        @bind-Settings="_model.ConnectionSettings" />
+
+    <hr/>
+
+    <div>
+         <div class="mb-3">
+            <label for="path" class="form-label">Path</label>
+            <InputText @bind-Value="_model.Path"
+                       class="form-control"
+                       id="path" />
+            <div class="form-text">Path to upload file to, or to download from.</div>
+          </div>
+    </div>
+
+    <div>
+        <button @onclick="OnDownloadFile">Download File</button>
+    </div>
+
+    <InputFile OnChange="OnUploadFile"/>
+
+</EditForm>
+
+@if(_model.HasError)
+{
+    <div class="text-danger">
+        @_model.ErrorMessage
+    </div>
+}
+else
+{
+    <div>
+        <div class="text-success">@_model.SuccessMessage</div>
+    </div>
+}
+

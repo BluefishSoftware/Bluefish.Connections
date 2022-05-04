@@ -83,6 +83,14 @@
         </SqlServerSettings>
         break;
 
+    case "Bluefish.Connections.Sql.OdbcConnection, Bluefish.Connections":
+        <OdbcSettings CanEdit="CanEdit"
+                           CssClass="@CssClass"
+                           Settings="@Settings"
+                           SettingsChanged="OnSettingsChanged">
+        </OdbcSettings>
+        break;
+
     default:
         @if (ChildContent is null)
         {
