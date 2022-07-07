@@ -6,13 +6,15 @@
 
 <div>Home</div>
 
-<hr/>
+<hr />
 
 <EditForm Model="_model">
 
+    <DataAnnotationsValidator />
+
     <ConnectionSelector @bind-Type="_dataType" />
 
-    <hr/>
+    <hr />
 
     <ConnectionSettings CanEdit="true"
                         ConnectionType="@_dataType"
@@ -20,7 +22,7 @@
 
 </EditForm>
 
-<hr/>
+<hr />
 
 <textarea style="width: 100%;" rows="6">@_settings</textarea>
 

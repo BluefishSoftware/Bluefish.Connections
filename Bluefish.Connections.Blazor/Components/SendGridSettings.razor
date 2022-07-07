@@ -4,9 +4,20 @@
     <label class="form-label">API Key</label>
     <InputText ValueExpression="@(() => _connection.ApiKey)"
                Value="@_connection.ApiKey"
-               ValueChanged="OnApiKeyChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.ApiKey, v)"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />
     <div class="form-text">API Key to access the SendGrid API.</div>
     <ValidationMessage For="() => _connection.ApiKey" />
+</div>
+
+<div class="@CssClass">
+    <label class="form-label">Senders Email Address</label>
+    <InputText ValueExpression="@(() => _connection.From)"
+               Value="@_connection.From"
+               ValueChanged="(v) => OnValueChanged(x => x.From, v)"
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
+    <div class="form-text">Senders email address for each message.</div>
+    <ValidationMessage For="() => _connection.From" />
 </div>

@@ -4,7 +4,7 @@
     <label class="form-label">Root Folder</label>
     <InputText ValueExpression="@(() => _connection.RootPath)"
                Value="@_connection.RootPath"
-               ValueChanged="OnRootPathChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.RootPath, v)"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.RootPath" />

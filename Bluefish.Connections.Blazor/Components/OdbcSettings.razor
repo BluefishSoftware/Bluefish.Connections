@@ -4,7 +4,7 @@
     <label class="form-label">Driver</label>
     <InputText ValueExpression="@(() => _connection.Driver)"
                Value="@_connection.Driver"
-               ValueChanged="OnDriverChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.Driver, v)"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />
     <div class="form-text">Optional ODBC driver to use</div>
@@ -15,7 +15,7 @@
     <label class="form-label">Data Source Name (DSN)</label>
     <InputText ValueExpression="@(() => _connection.Dsn)"
                Value="@_connection.Dsn"
-               ValueChanged="OnDsnChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.Dsn, v)"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.Dsn" />
@@ -25,7 +25,7 @@
     <label class="form-label">User Id</label>
     <InputText ValueExpression="@(() => _connection.UserId)"
                Value="@_connection.UserId"
-               ValueChanged="OnUserIdChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.UserId, v)"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.UserId" />
@@ -35,7 +35,7 @@
     <label class="form-label">Password</label>
     <InputText ValueExpression="@(() => _connection.Password)"
                Value="@_connection.Password"
-               ValueChanged="OnPasswordChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.Password, v)"
                type="password"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />

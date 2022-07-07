@@ -4,7 +4,7 @@
     <label class="form-label">Server Name</label>
     <InputText ValueExpression="@(() => _connection.ServerName)"
                Value="@_connection.ServerName"
-               ValueChanged="OnServerNameChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.ServerName, v)"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />
     <div class="form-text">Name of the server.</div>
@@ -15,7 +15,7 @@
     <label class="form-label">Share Name</label>
     <InputText ValueExpression="@(() => _connection.ShareName)"
                Value="@_connection.ShareName"
-               ValueChanged="OnShareNameChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.ShareName, v)"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />
     <div class="form-text">Name of the share.</div>
@@ -26,7 +26,7 @@
     <label class="form-label">Root Folder</label>
     <InputText ValueExpression="@(() => _connection.RootPath)"
                Value="@_connection.RootPath"
-               ValueChanged="OnRootPathChanged"
+               ValueChanged="(v) => OnValueChanged(x => x.RootPath, v)"
                class="form-control form-control-sm"
                disabled="@(!CanEdit)" />
     <div class="form-text">Relative path to root folder.</div>

@@ -1,20 +1,52 @@
 ﻿<div class="@CssClass">
     <label class="form-label">Type</label>
-    <InputSelect
-        autocomplete="off"
-        class="form-control form-control-sm"
-        disabled="@(!CanEdit)"
-        TValue="string"
-        ValueExpression="@(() => Type)"
-        Value="@Type"
-        ValueChanged="OnTypeChanged">
+    <InputSelect autocomplete="off"
+                 class="form-control form-control-sm"
+                 disabled="@(!CanEdit)"
+                 TValue="string"
+                 ValueExpression="@(() => Type)"
+                 Value="@Type"
+                 ValueChanged="OnTypeChanged">
         @if (ShowNone)
         {
             <option value="@TOKEN_NONE">(none)</option>
         }
-        @foreach (var key in _dataTypes.Keys.OrderBy(x => _dataTypes[x]))
+        @if (this.FilterType.HasValue)
         {
-            <option value="@key">@_dataTypes[key]</option>
+            @foreach (var key in _dataTypes.Keys.OrderBy(x => _dataTypes[x].Name))
+            {
+                <option value="@key">@_dataTypes[key].Name</option>
+            }
+        }
+        else
+        {
+            var emailConnections = _dataTypes.Where(x => x.Value.Type == Models.ConnectionTypes.Email).OrderBy(x => x.Value.Name);
+            if (emailConnections.Any())
+            {
+                <option disabled>---- Email Providers ----</option>
+            }
+            @foreach (var kvp in emailConnections)
+            {
+                <option value="@kvp.Key">@kvp.Value.Name</option>
+            }
+            var fileConnections = _dataTypes.Where(x => x.Value.Type == Models.ConnectionTypes.File).OrderBy(x => x.Value.Name);
+            if (fileConnections.Any())
+            {
+                <option disabled>---- File Storage ----</option>
+            }
+            @foreach (var kvp in fileConnections)
+            {
+                <option value="@kvp.Key">@kvp.Value.Name</option>
+            }
+            var sqlConnections = _dataTypes.Where(x => x.Value.Type == Models.ConnectionTypes.SQL).OrderBy(x => x.Value.Name);
+            if (sqlConnections.Any())
+            {
+                <option disabled>---- SQL Databases ----</option>
+            }
+            @foreach (var kvp in sqlConnections)
+            {
+                <option value="@kvp.Key">@kvp.Value.Name</option>
+            }
         }
     </InputSelect>
 </div>
