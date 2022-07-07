@@ -61,8 +61,17 @@ public class SendGridConnection : EmailConnectionBase
         {
             msg.AddBcc(new EmailAddress(content.Bcc));
         }
-        msg.AddAttachments(messageAttachments);
+        if (messageAttachments.Count > 0)
+        {
+            msg.AddAttachments(messageAttachments);
+        }
         var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
+        var statusCode = (int)response.StatusCode;
+        if (statusCode < 200 || statusCode > 299)
+        {
+            var body = await response.Body.ReadAsStringAsync().ConfigureAwait(false);
+            throw new Exception($"SendGrid : ({response.StatusCode}) {body}".Trim());
+        }
     }
 
     #endregion
