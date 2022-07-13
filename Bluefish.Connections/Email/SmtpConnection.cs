@@ -43,12 +43,13 @@ public class SmtpConnection : EmailConnectionBase
         };
         var message = new MailMessage
         {
+            From = new MailAddress(Username),
             Subject = content.Subject,
             Body = !string.IsNullOrWhiteSpace(content.HtmlMessage) ? content.HtmlMessage : content.PlainMessage,
             IsBodyHtml = !string.IsNullOrWhiteSpace(content.HtmlMessage)
         };
         message.To.Add(content.To);
-        if(!string.IsNullOrWhiteSpace(content.Cc))
+        if (!string.IsNullOrWhiteSpace(content.Cc))
         {
             message.CC.Add(content.Cc);
         }
@@ -56,7 +57,7 @@ public class SmtpConnection : EmailConnectionBase
         {
             message.Bcc.Add(content.Bcc);
         }
-        foreach(var attachment in content.Attachments)
+        foreach (var attachment in content.Attachments)
         {
             message.Attachments.Add(new Attachment(attachment.Filename));
         }
