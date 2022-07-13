@@ -26,6 +26,14 @@
 </div>
 
 <div class="@CssClass">
+    <BfSwitch Text="Enable SSL"
+              TValue="bool"
+              Value="_connection.EnableSsl"
+              ValueChanged="(v) => OnValueChanged(x => x.EnableSsl, v)" />
+    <ValidationMessage For="() => _connection.EnableSsl" />
+</div>
+
+<div class="@CssClass">
     <label class="form-label">Username</label>
     <InputText ValueExpression="@(() => _connection.Username)"
                Value="@_connection.Username"

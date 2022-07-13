@@ -25,8 +25,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Bluefish.Blazor" Version="2.0.25" />
-		<PackageReference Include="Bluefish.Connections" Version="1.0.22" />
+		<PackageReference Include="Bluefish.Blazor" Version="2.1.19" />
+		<PackageReference Include="Bluefish.Connections" Version="1.0.27" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
 		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
