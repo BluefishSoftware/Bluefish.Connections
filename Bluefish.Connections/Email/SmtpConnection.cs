@@ -17,11 +17,13 @@ public class SmtpConnection : EmailConnectionBase
 
     #region Settings
 
-    public string Server { get; set; } = String.Empty;
+    public bool EnableSsl { get; set; }
 
     public string Password { get; set; } = String.Empty;
 
     public int Port { get; set; } = 21;
+
+    public string Server { get; set; } = String.Empty;
 
     public string Username { get; set; } = String.Empty;
 
@@ -39,7 +41,7 @@ public class SmtpConnection : EmailConnectionBase
         {
             Port = Port,
             Credentials = new NetworkCredential(Username, Password),
-            EnableSsl = true
+            EnableSsl = EnableSsl
         };
         var message = new MailMessage
         {
