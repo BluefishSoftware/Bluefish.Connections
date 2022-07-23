@@ -44,6 +44,26 @@ public class DigitalOceanSpacesConnection : FileConnectionBase
     #region IFileConnection
 
     /// <summary>
+    /// Attempts to create a new folder.
+    /// </summary>
+    /// <param name="path">Relative path for the new folder.</param>
+    /// <param name="cancellationToken">Token to allow cancellation of save.</param>
+    /// <returns>true if the create was successful, other false.</returns>
+    public override async Task CreateFolderAsync(string path, CancellationToken cancellationToken = default)
+    {
+        // create client
+        using var client = CreateClient();
+
+        var request = new PutObjectRequest
+        {
+            BucketName = SpaceName,
+            Key = path.EnsureEndsWith(Constants.PATH_SEPARATOR),
+            CannedACL = S3CannedACL.Private // is default but here to be explicit
+        };
+        var result = await client.PutObjectAsync(request, cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
     /// Attempts to delete the given file from DigitalOcean Spaces.
     /// </summary>
     /// <param name="key">Unique identifier within Space for file.</param>
@@ -54,14 +74,38 @@ public class DigitalOceanSpacesConnection : FileConnectionBase
         // create client
         using var client = CreateClient();
 
-        // delete file
-        var request = new DeleteObjectRequest
+        if (key.EndsWith(Constants.PATH_SEPARATOR))
         {
-            BucketName = SpaceName,
-            Key = key
-        };
-        var result = await client.DeleteObjectAsync(request, cancellationToken).ConfigureAwait(false);
-        return result.HttpStatusCode == System.Net.HttpStatusCode.OK;
+            // delete folder - fetch all files to be deleted
+            var request = new ListObjectsV2Request()
+            {
+                BucketName = SpaceName,
+                Prefix = key
+            };
+            var response = await client.ListObjectsV2Async(request, cancellationToken).ConfigureAwait(false);
+            if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var request2 = new DeleteObjectsRequest
+                {
+                    BucketName = SpaceName,
+                    Objects = new List<KeyVersion>(response.S3Objects.Select(x => new KeyVersion { Key = x.Key }))
+                };
+                var result = await client.DeleteObjectsAsync(request2, cancellationToken).ConfigureAwait(false);
+                return result.HttpStatusCode == System.Net.HttpStatusCode.OK;
+            }
+        }
+        else
+        {
+            // delete file
+            var request = new DeleteObjectRequest
+            {
+                BucketName = SpaceName,
+                Key = key,
+            };
+            var result = await client.DeleteObjectAsync(request, cancellationToken).ConfigureAwait(false);
+            return result.HttpStatusCode == System.Net.HttpStatusCode.OK;
+        }
+        return false;
     }
 
     /// <summary>
@@ -83,6 +127,69 @@ public class DigitalOceanSpacesConnection : FileConnectionBase
         };
         var response = await client.GetObjectAsync(request, cancellationToken).ConfigureAwait(false);
         return response.ResponseStream;
+    }
+
+    /// <summary>
+    /// Attempts to list direcotry entries from DigitalOcean Spaces.
+    /// </summary>
+    /// <param name="path">Relative path for the directory to list.</param>
+    /// <param name="cancellationToken">Token to allow cancellation op operation.</param>
+    /// <returns>An array of DirectoryEntry instances.</returns>
+    public override async Task<DirectoryEntry[]> ListAsync(string path, CancellationToken cancellationToken = default)
+    {
+        var items = new List<DirectoryEntry>();
+        path = path.EnsureEndsWith(Constants.PATH_SEPARATOR);
+
+        // build and send request
+        using var client = CreateClient();
+        var request = new ListObjectsV2Request()
+        {
+            BucketName = SpaceName,
+            Prefix = path
+        };
+        var response = await client.ListObjectsV2Async(request, cancellationToken).ConfigureAwait(false);
+
+        // parse response if valid
+        if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+        {
+            var folders = new List<string>();
+            foreach (var s3obj in response.S3Objects)
+            {
+                var key = s3obj.Key;
+                var followingPath = key[path.Length..];
+                // sub-folder file?
+                if (string.IsNullOrWhiteSpace(followingPath))
+                {
+                    // ignore own folder entry
+                }
+                else if (followingPath.Contains(Constants.PATH_SEPARATOR))
+                {
+                    var folder = followingPath[..followingPath.IndexOf(Constants.PATH_SEPARATOR)];
+                    if (!string.IsNullOrWhiteSpace(folder) && !folders.Contains(folder))
+                    {
+                        folders.Add(folder);
+                        items.Add(new DirectoryEntry
+                        {
+                            Path = path + folder,
+                            LastModified = s3obj.LastModified.ToUniversalTime(),
+                            Type = DirectoryEntryTypes.Folder
+                        });
+                    }
+                }
+                else
+                {
+                    items.Add(new DirectoryEntry
+                    {
+                        Path = key,
+                        LastModified = s3obj.LastModified,
+                        SizeBytes = s3obj.Size,
+                        Type = DirectoryEntryTypes.File
+                    });
+                }
+            }
+        }
+
+        return items.ToArray();
     }
 
     /// <summary>

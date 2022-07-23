@@ -16,4 +16,9 @@ public static class StringExtensions
         }
         return (T?)JsonSerializer.Deserialize(settings, t);
     }
+
+    public static string EnsureEndsWith(this string path, char ch)
+    {
+        return $"{path.TrimEnd(ch)}{ch}";
+    }
 }
