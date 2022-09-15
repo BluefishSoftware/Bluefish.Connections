@@ -73,3 +73,13 @@
                  disabled="@(!CanEdit)" />
     <ValidationMessage For="() => _connection.ConnectionTimeout" />
 </div>
+
+<div class="@CssClass">
+    <label class="form-label">Extra</label>
+    <InputText ValueExpression="@(() => _connection.Extra)"
+               Value="@_connection.Extra"
+               ValueChanged="(v) => OnValueChanged(x => x.Extra, v)"
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
+    <ValidationMessage For="() => _connection.Extra" />
+</div>

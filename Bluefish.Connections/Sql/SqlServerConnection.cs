@@ -18,14 +18,9 @@ public class SqlServerConnection : SqlConnectionBase
     #region Settings
 
     /// <summary>
-    /// Gets or sets the hostname or IP address of the SQL Server.
+    /// Gets or sets the connection timeout in seconds.
     /// </summary>
-    public string Server { get; set; } = "(local)\\SQLExpress";
-
-    /// <summary>
-    /// Gets or sets the port number of the SQL Server.
-    /// </summary>
-    public int Port { get; set; } = 1433;
+    public int ConnectionTimeout { get; set; } = 10;
 
     /// <summary>
     /// Gets or sets the database on the server to connect with.
@@ -33,14 +28,14 @@ public class SqlServerConnection : SqlConnectionBase
     public string Database { get; set; } = String.Empty;
 
     /// <summary>
-    /// Gets or sets whether Windows Authentication is to be used.
+    /// Gets or sets whether to encrypt the connection.
     /// </summary>
-    public bool UseWindowsAuthentication { get; set; } = true;
+    public bool Encrypt { get; set; } = false;
 
     /// <summary>
-    /// Gets or sets the User Id of account to connect as.
+    /// Gets or sets extra parameters to append to the connection string.
     /// </summary>
-    public string UserId { get; set; } = String.Empty;
+    public string Extra { get; set; } = String.Empty;
 
     /// <summary>
     /// Gets or sets the password for the account to connect as.
@@ -48,9 +43,29 @@ public class SqlServerConnection : SqlConnectionBase
     public string Password { get; set; } = String.Empty;
 
     /// <summary>
-    /// Gets or sets the connection timeout in seconds.
+    /// Gets or sets the port number of the SQL Server.
     /// </summary>
-    public int ConnectionTimeout { get; set; } = 10;
+    public int Port { get; set; } = 1433;
+
+    /// <summary>
+    /// Gets or sets the hostname or IP address of the SQL Server.
+    /// </summary>
+    public string Server { get; set; } = "(local)\\SQLExpress";
+
+    /// <summary>
+    /// Gets or sets whether to trust Server certificate.
+    /// </summary>
+    public bool TrustServerCertificate { get; set; } = false;
+
+    /// <summary>
+    /// Gets or sets the User Id of account to connect as.
+    /// </summary>
+    public string UserId { get; set; } = String.Empty;
+
+    /// <summary>
+    /// Gets or sets whether Windows Authentication is to be used.
+    /// </summary>
+    public bool UseWindowsAuthentication { get; set; } = true;
 
     #endregion
 
@@ -58,12 +73,14 @@ public class SqlServerConnection : SqlConnectionBase
 
     public override string GetConnectionString()
     {
-        var builder = new SqlConnectionStringBuilder
+        var builder = new SqlConnectionStringBuilder(Extra)
         {
             DataSource = Port == 1433 ? Server ?? "" : $"{Server},{Port}",
             ConnectTimeout = ConnectionTimeout
         };
         builder.InitialCatalog = Database ?? string.Empty;
+        builder.Encrypt = Encrypt;
+        builder.TrustServerCertificate = TrustServerCertificate;
         if (string.IsNullOrWhiteSpace(UserId))
         {
             builder.IntegratedSecurity = true;
