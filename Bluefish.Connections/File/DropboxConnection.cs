@@ -47,8 +47,9 @@ public class DropboxConnection : FileConnectionBase
     /// <returns>true if the delete was successful, other false.</returns>
     public override async Task<bool> DeleteFileAsync(string path, CancellationToken cancellationToken = default)
     {
+        var fullPath = $"{RootFolder.Replace('\\', '/').TrimEnd('/')}/{path.Replace('\\', '/').TrimStart('/')}";
         using var client = new DropboxClient(AccessToken);
-        await client.Files.DeleteAsync(path).ConfigureAwait(false);
+        await client.Files.DeleteAsync(fullPath).ConfigureAwait(false);
         return true;
     }
 
@@ -60,8 +61,9 @@ public class DropboxConnection : FileConnectionBase
     /// <returns>A Stream with file contents.</returns>
     public override async Task<Stream> GetFileAsync(string path, CancellationToken cancellationToken = default)
     {
+        var fullPath = $"{RootFolder.Replace('\\', '/').TrimEnd('/')}/{path.Replace('\\', '/').TrimStart('/')}";
         using var client = new DropboxClient(AccessToken);
-        var result = await client.Files.DownloadAsync(path).ConfigureAwait(false);
+        var result = await client.Files.DownloadAsync(fullPath).ConfigureAwait(false);
         return await result.GetContentAsStreamAsync().ConfigureAwait(false);
     }
 
@@ -75,9 +77,11 @@ public class DropboxConnection : FileConnectionBase
     /// <returns>true if the upload was successful, other false.</returns>
     public override async Task<bool> PutFileAsync(string path, Stream content, IEnumerable<Models.Metadata>? metadata = null, CancellationToken cancellationToken = default)
     {
+        // calc full path
+        var fullPath = $"{RootFolder.Replace('\\', '/').TrimEnd('/')}/{path.Replace('\\', '/').TrimStart('/')}";
         using var client = new DropboxClient(AccessToken);
         // upload file - will create folders
-        await client.Files.UploadAsync(path, WriteMode.Overwrite.Instance, body: content).ConfigureAwait(false);
+        await client.Files.UploadAsync(fullPath, WriteMode.Overwrite.Instance, body: content).ConfigureAwait(false);
         return true;
     }
 
