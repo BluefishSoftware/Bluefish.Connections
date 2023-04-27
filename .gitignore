@@ -363,6 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 /Bluefish.Connections/nuget-api-key.txt
-/Bluefish.Connections/publish-nuget.ps1
 /Bluefish.Connections.Blazor/nuget-api-key.txt
-/Bluefish.Connections.Blazor/publish-nuget.ps1
