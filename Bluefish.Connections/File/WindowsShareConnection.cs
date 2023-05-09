@@ -45,7 +45,15 @@ public class WindowsShareConnection : FileConnectionBase
     /// <returns>true if the delete was successful, other false.</returns>
     public override Task<bool> DeleteFileAsync(string path, CancellationToken cancellationToken = default)
     {
-        System.IO.File.Delete(path);
+        // calculate path
+        var shareName = ShareName.Replace("/", "\\").TrimStart('\\').TrimEnd('\\');
+        var rootPath = RootPath.Replace("/", "\\").TrimStart('\\').TrimEnd('\\');
+        var subPath = path.Replace("/", "\\").TrimStart('\\').TrimEnd('\\');
+
+        // this provider expects paths relative to the network share folder root
+        var fullPath = $"\\\\{ServerName}\\{shareName}\\{rootPath}\\{subPath}";
+
+        System.IO.File.Delete(fullPath);
         return Task.FromResult(true);
     }
 
