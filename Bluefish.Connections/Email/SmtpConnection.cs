@@ -61,7 +61,8 @@ public class SmtpConnection : EmailConnectionBase
         }
         foreach (var attachment in content.Attachments)
         {
-            message.Attachments.Add(new Attachment(attachment.Filename));
+            using var ms = new MemoryStream(attachment.Content);
+            message.Attachments.Add(new Attachment(ms, attachment.Filename, attachment.Type));
         }
         await client.SendMailAsync(message).ConfigureAwait(false);
     }
