@@ -1,0 +1,46 @@
+﻿@inherits SettingsBase<Office365UserEmailConnection>
+
+<div class="@CssClass">
+    <label class="form-label">Tenant Id</label>
+    <InputText ValueExpression="@(() => _connection.TenantId)"
+               Value="@_connection.TenantId"
+               ValueChanged="(v) => OnValueChanged(x => x.TenantId, v)"
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
+    <div class="form-text">Azure AD - App - Tenant Id.</div>
+    <ValidationMessage For="() => _connection.TenantId" />
+</div>
+
+<div class="@CssClass">
+    <label class="form-label">Client Id</label>
+    <InputText ValueExpression="@(() => _connection.ClientId)"
+               Value="@_connection.ClientId"
+               ValueChanged="(v) => OnValueChanged(x => x.ClientId, v)"
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
+    <div class="form-text">Azure AD - App - Client Id.</div>
+    <ValidationMessage For="() => _connection.ClientId" />
+</div>
+
+<div class="@CssClass">
+    <label class="form-label">Client Secret</label>
+    <InputText ValueExpression="@(() => _connection.ClientSecret)"
+               Value="@_connection.ClientSecret"
+               ValueChanged="(v) => OnValueChanged(x => x.ClientSecret, v)"
+               class="form-control form-control-sm"
+               type="password"
+               disabled="@(!CanEdit)" />
+    <div class="form-text">Azure AD - App - Client Secret.</div>
+    <ValidationMessage For="() => _connection.ClientSecret" />
+</div>
+
+<div class="@CssClass">
+    <label class="form-label">Object Id</label>
+    <InputText ValueExpression="@(() => _connection.ObjectId)"
+               Value="@_connection.ObjectId"
+               ValueChanged="(v) => OnValueChanged(x => x.ObjectId, v)"
+               class="form-control form-control-sm"
+               disabled="@(!CanEdit)" />
+    <div class="form-text">Azure AD - App - Object Id - Identifier of the User account whose mailbox will be used</div>
+    <ValidationMessage For="() => _connection.ObjectId" />
+</div>

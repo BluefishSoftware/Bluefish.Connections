@@ -17,6 +17,14 @@
         </SmtpSettings>
         break;
 
+    case "Bluefish.Connections.Email.Office365UserEmailConnection, Bluefish.Connections":
+        <Office365UserEmailSettings CanEdit="CanEdit"
+                      CssClass="@CssClass"
+                      Settings="@Settings"
+                      SettingsChanged="OnSettingsChanged">
+        </Office365UserEmailSettings>
+        break;
+
     @* File Connections *@
     case "Bluefish.Connections.File.DigitalOceanSpacesConnection, Bluefish.Connections":
         <DigitalOceanSpacesSettings CanEdit="CanEdit"
