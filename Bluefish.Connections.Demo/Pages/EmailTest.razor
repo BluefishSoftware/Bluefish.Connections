@@ -1,0 +1,87 @@
+﻿@page "/EmailTest"
+@using Bluefish.Connections.Interfaces
+
+<div>Email TEST</div>
+
+<hr/>
+
+<!-- connection -->
+<EditForm Model="_model">
+
+    <ConnectionSelector @bind-Type="_model.ConnectionType"
+                        FilterType="Models.ConnectionTypes.Email" />
+    <hr/>
+
+    <ConnectionSettings CanEdit="true"
+                        ConnectionType="@_model.ConnectionType"
+                        @bind-Settings="_model.ConnectionSettings" />
+
+    <hr/>
+
+    <div>
+        <div class="mb-3">
+            <label for="to" class="form-label">To</label>
+            <InputText @bind-Value="_model.To"
+                       class="form-control"
+                       id="to" />
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <label for="cc" class="form-label">Cc</label>
+            <InputText @bind-Value="_model.Cc"
+                       class="form-control"
+                       id="cc" />
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <label for="bcc" class="form-label">Bcc</label>
+            <InputText @bind-Value="_model.Bcc"
+                       class="form-control"
+                       id="bcc" />
+        </div>
+    </div>
+
+    <div>
+        <div class="mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <InputText @bind-Value="_model.Subject"
+                       class="form-control"
+                       id="path" />
+        </div>
+    </div>
+
+    <div>
+         <div class="mb-3">
+            <label for="body" class="form-label">Body</label>
+            <InputTextArea @bind-Value="_model.Body"
+                           class="form-control"
+                           id="body"
+                           rows="4" />
+          </div>
+    </div>
+
+    <div>
+        <button @onclick="OnSendEmailAsync">Send Email</button>
+    </div>
+
+</EditForm>
+
+<hr/>
+
+@if(_model.HasError)
+{
+    <div class="text-danger">
+        @_model.ErrorMessage
+    </div>
+}
+else
+{
+    <div>
+        <div class="result">@_model.ResultMessage</div>
+    </div>
+}
+
