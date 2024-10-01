@@ -22,7 +22,7 @@ public partial class SqlTest
 
         public int Rows { get; set; }
 
-        public string Output { get; set; }
+        public string Output { get; set; } = string.Empty;
     }
 
     private async Task OnRunQueryAsync()
@@ -33,13 +33,13 @@ public partial class SqlTest
             _model.Output = string.Empty;
             _model.ErrorMessage = string.Empty;
             var connection = _model.ConnectionType.InstantiateConnection<ISqlConnection>(_model.ConnectionSettings);
-            if(connection is null)
+            if (connection is null)
             {
                 throw new Exception("Failed to instantiate connection");
             }
             var dbFactory = connection.GetFactory();
             using var dbConnection = dbFactory.CreateConnection();
-            if(dbConnection is null)
+            if (dbConnection is null)
             {
                 throw new Exception("Failed to instantiate database connection");
             }
@@ -53,19 +53,19 @@ public partial class SqlTest
             dbCommand.CommandText = _model.Query;
             dbCommand.Connection = dbConnection;
             using var reader = await dbCommand.ExecuteReaderAsync().ConfigureAwait(true);
-            if(reader != null)
+            if (reader != null)
             {
                 var sb = new StringBuilder();
-                while(reader.Read())
+                while (reader.Read())
                 {
-                    if(_model.Rows > 0)
+                    if (_model.Rows > 0)
                     {
                         sb.AppendLine();
                     }
                     _model.Rows++;
                     for (var idx = 0; idx < reader.FieldCount; idx++)
                     {
-                        if(idx > 0)
+                        if (idx > 0)
                         {
                             sb.Append(", ");
                         }
@@ -83,7 +83,7 @@ public partial class SqlTest
                 _model.Output = sb.ToString();
             }
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             _model.ErrorMessage = ex.Message;
         }

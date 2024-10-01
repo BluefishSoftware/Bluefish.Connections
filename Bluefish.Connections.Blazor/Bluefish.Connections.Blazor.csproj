@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>Mark Goldring</Authors>
@@ -25,11 +25,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Bluefish.Blazor" Version="2.1.43" />
+		<PackageReference Include="Bluefish.Blazor" Version="2.1.72" />
 		<PackageReference Include="System.Text.Json" Version="8.0.4" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
-		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
-		<PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="8.0.8" />
+		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.143">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
