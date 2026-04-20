@@ -49,7 +49,7 @@ public class DropboxConnection : FileConnectionBase
     {
         var fullPath = $"{RootFolder.Replace('\\', '/').TrimEnd('/')}/{path.Replace('\\', '/').TrimStart('/')}";
         using var client = new DropboxClient(AccessToken);
-        await client.Files.DeleteAsync(fullPath).ConfigureAwait(false);
+        await client.Files.DeleteV2Async(fullPath).ConfigureAwait(false);
         return true;
     }
 

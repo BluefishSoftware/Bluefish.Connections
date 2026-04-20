@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>Mark Goldring</Authors>
@@ -9,7 +9,7 @@
 		<Description>A library that abstracts connections to remote systems.</Description>
 		<PackageIcon>BluefishIcon.png</PackageIcon>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-		<Copyright>2022 Bluefish Software Ltd</Copyright>
+		<Copyright>2026 Bluefish Software Ltd</Copyright>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 
@@ -21,20 +21,20 @@
 
 	<ItemGroup>
 		<PackageReference Include="AWSSDK.S3" Version="3.7.403.5" />
-		<PackageReference Include="Azure.Identity" Version="1.12.1" />
+		<PackageReference Include="Azure.Identity" Version="1.21.0" />
 		<PackageReference Include="Dropbox.Api" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Graph" Version="5.58.0" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.6" />
+		<PackageReference Include="Microsoft.Graph" Version="5.104.0" />
 		<PackageReference Include="Nerdbank.GitVersioning" Version="3.6.143">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>		
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-		<PackageReference Include="Npgsql" Version="8.0.4" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+		<PackageReference Include="Npgsql" Version="10.0.2" />
 		<PackageReference Include="Rebex.Ftp" Version="7.0.8943" />
 		<PackageReference Include="SendGrid" Version="9.29.3" />
-		<PackageReference Include="System.Data.Odbc" Version="8.0.0" />
+		<PackageReference Include="System.Data.Odbc" Version="10.0.6" />
 	</ItemGroup>
 
 </Project>
