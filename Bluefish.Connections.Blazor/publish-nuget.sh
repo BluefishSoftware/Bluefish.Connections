@@ -3,14 +3,13 @@ set -euo pipefail
 
 RELEASE_BRANCH="main"
 
-# This script will publish to nuget using the api key in nuget-api-key.txt in the same folder.
-# The api key issued by nuget.org should ideally only have permissions to update a single package
-# with new versions.
+# This script will publish to nuget using the api key in nuget-api-key.txt at the repo root
+# (shared across all packages in this repo).
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-API_KEY_FILE="nuget-api-key.txt"
+API_KEY_FILE="$(git rev-parse --show-toplevel)/nuget-api-key.txt"
 if [[ ! -f "$API_KEY_FILE" ]]; then
     echo "Error: $API_KEY_FILE does not exist" >&2
     exit 1
