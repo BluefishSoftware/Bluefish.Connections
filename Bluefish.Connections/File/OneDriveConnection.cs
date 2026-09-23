@@ -60,9 +60,22 @@ public class OneDriveConnection : FileConnectionBase
     /// <param name="path">Relative path for the file.</param>
     /// <param name="cancellationToken">Token to allow cancellation of save.</param>
     /// <returns>true if the delete was successful, other false.</returns>
-    public override Task<bool> DeleteFileAsync(string path, CancellationToken cancellationToken = default)
+    public override async Task<bool> DeleteFileAsync(string path, CancellationToken cancellationToken = default)
     {
-        return Task.FromResult(true);
+        // get new token if a) no token or b) within 5 minutes of token expiry
+        if (string.IsNullOrWhiteSpace(AccessToken) || TokenExpiry.HasValue && DateTime.UtcNow > TokenExpiry.Value.AddMinutes(-5))
+        {
+            await GetNewAccessTokenAsync().ConfigureAwait(false);
+        }
+
+        // if here then should have a valid access token
+        using HttpClient client = new();
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AccessToken);
+        var fullPath = $"{Folder.Replace('\\', '/').TrimEnd('/')}/{path.Replace('\\', '/').TrimStart('/')}";
+        var drive = string.IsNullOrWhiteSpace(Drive) ? "/drive/root" : Drive.TrimStart('/');
+        var url = $"https://graph.microsoft.com/v1.0/{drive}:{fullPath}";
+        var response = await client.DeleteAsync(url, cancellationToken).ConfigureAwait(false);
+        return response.StatusCode == HttpStatusCode.NoContent;
     }
 
 

@@ -31,7 +31,14 @@ public class LocalFileSystemConnection : FileConnectionBase
     /// <returns>true if the delete was successful, other false.</returns>
     public override Task<bool> DeleteFileAsync(string path, CancellationToken cancellationToken = default)
     {
-        System.IO.File.Delete(path);
+        // calculate path
+        var rootPath = RootPath.Replace('/', Path.DirectorySeparatorChar).TrimEnd(Path.DirectorySeparatorChar);
+        var subPath = path.Replace('/', Path.DirectorySeparatorChar).TrimEnd(Path.DirectorySeparatorChar);
+
+        // this provider expects paths relative to the root path
+        var fullPath = $"{rootPath}{Path.DirectorySeparatorChar}{subPath}";
+
+        System.IO.File.Delete(fullPath);
         return Task.FromResult(true);
     }
 

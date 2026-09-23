@@ -362,5 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-/Bluefish.Connections/nuget-api-key.txt
-/Bluefish.Connections.Blazor/nuget-api-key.txt
+/nuget-api-key.txt
