@@ -108,7 +108,16 @@ public class FtpConnection : FileConnectionBase, IInitializableConnection
     {
         using var client = new Ftp();
         ConnectToServer(client);
-        await client.DeleteFileAsync(path).ConfigureAwait(false);
+
+        // descend into folder containing file
+        var fullPath = $"{RootFolder.Replace('\\', '/').TrimEnd('/')}/{path.Replace('\\', '/').TrimStart('/')}";
+        var parts = fullPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+        for (var i = 0; i < parts.Length - 1; i++)
+        {
+            await DescendIntoFolderAsync(parts[i], client).ConfigureAwait(false);
+        }
+
+        await client.DeleteFileAsync(parts.Last()).ConfigureAwait(false);
         return true;
     }
 
